@@ -1,0 +1,3015 @@
+[Rainmeter]
+Update=1000
+MouseScrollUpAction=[!CommandMeasure dbPath "IndexUp"][!UpdateMeasure dbPath][!CommandMeasure xlPath "IndexUp"][!UpdateMeasure xlPath][!CommandMeasure docPath "IndexUp"][!UpdateMeasure docPath][!CommandMeasure pubPath "IndexUp"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+MouseScrollDownAction=[!CommandMeasure dbPath "IndexDown"][!UpdateMeasure dbPath][!CommandMeasure xlPath "IndexDown"][!UpdateMeasure xlPath][!CommandMeasure docPath "IndexDown"][!UpdateMeasure docPath][!CommandMeasure pubPath "IndexDown"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+
+[Metadata]
+Name=MyOS
+Author=Wizard
+Information=Desktop OS Companion
+License=Creative Commons Attribution-Non-Commercial-Share Alike 3.0
+Version=1.1 Beta
+
+[Variables]
+@Include=#@#\Variables.inc
+
+[MeasureIconSpacingV]
+Measure=Calc
+Formula=(((#WorkAreaHeight#/10*8-455) / 4) + 75)
+IfAboveValue=0
+IfAboveAction=[!WriteKeyValue Variables IconSpacingV [MeasureIconSpacingV] "#@#\Variables.inc"]
+
+[MeasureIconSpacingH]
+Measure=Calc
+Formula=(((#WorkAreaWidth#/10*6-500) / 5) +75)
+IfAboveValue=161
+IfAboveAction=[!SetOption LogoffBG Hidden "0"][!SetOption lblLogoff Hidden "0"][!WriteKeyValue Variables IconSpacingH [MeasureIconSpacingH] "#@#\Variables.inc"]
+IfBelowValue=162
+IfBelowAction=[!SetOption SystemMenuBG Y "-2r"][!WriteKeyValue Variables IconSpacingH [MeasureIconSpacingH] "#@#\Variables.inc"]
+
+;------------------------------------------ Styles ---------------------------------------------
+[ButtonStyle]
+FontFace=Denton
+FontSize=12
+AntiAlias=1
+
+[IconStyle]
+H=75
+W=75
+AntiAlias = 1
+Hidden=1
+
+;-----------------------------------------------------------------------------------------------
+;------------------------------------------ Framework ------------------------------------------
+
+[TopBorder]
+Meter=IMAGE
+SolidColor=#LightBlue#
+X=0
+Y=(#WorkAreaHeight#/10)
+W=#WorkAreaWidth#
+H=2
+
+[BottomBorder]
+Meter=IMAGE
+SolidColor=#LightBlue#
+X=0
+Y=((#WorkAreaHeight#/10)*9)
+W=#WorkAreaWidth#
+H=2
+
+[LeftBorder]
+Meter=Image
+SolidColor=#LightBlue#
+X=((#WorkAreaWidth#/10)*2.0)
+Y=(#WorkAreaHeight#/10)+2
+H=((#WorkAreaHeight#/10)*8)-1
+W=2
+
+;--------------------------------------------------------------------------------------------------
+
+
+;--------------------------------------------------------------------------------------------------
+;----------------------------------- Top Border / Menu System -------------------------------------
+
+[IDLogo]
+Meter=Image
+X=5
+Y=5
+ImageName=#@#Images\OneWorld-Transparent.png
+PreserveAspectRatio=1
+H=((#WorkAreaHeight#/10)-10)
+W=((#WorkAreaHeight#/10)-10)
+ImageAlpha=150
+AntiAlias=1
+LeftMouseUpAction=[#HomePage#]
+
+[MeasureTime]
+Measure=Time
+Format=%H:%M:%S
+
+[DigitalClock]
+Meter=String
+MeasureName=MeasureTime
+FontFace=Denton
+FontColor=#Yellow#
+FontSize=25
+AntiAlias=1
+X=((#WorkAreaHeight#/10)+15)
+Y=5r
+
+[DigitalClock2]
+Meter=String
+MeasureName=MeasureTime
+FontFace=Denton
+FontColor=#Red#
+FontSize=25
+AntiAlias=1
+X=-2r
+Y=-2r
+
+[MeasureDate]
+Measure=Time
+Format=%#x
+
+[CurrentDate]
+Meter=String
+MeasureName=MeasureDate
+FontColor=#Yellow#
+FontSize=20
+StringAlign=CenterCenter
+FontFace=Denton
+AntiAlias=1
+X=(#WorkAreaWidth#)/2
+Y=20r
+
+[CurrentDateBG]
+Meter=String
+MeasureName=MeasureDate
+FontColor=#Red#
+FontSize=20
+StringAlign=CenterCenter
+FontFace=Denton
+AntiAlias=1
+X=-2r
+Y=-2r
+
+[UserNameBG]
+Meter=Image
+X=((#WorkAreaHeight#/10)+1)
+Y=((#WorkAreaHeight#/10)-25)
+H=20
+W=(((#WorkAreaWidth#/10)*2)-(#WorkAreaHeight#/10))
+SolidColor=#ButtonLight#
+MouseOverAction = [!SetOption UserName FontColor #Blue#]
+MouseLeaveAction = [!SetOption UserName FontColor #Black#]
+LeftMouseUpAction=["Shell:::{59031a47-3f72-44a7-89c5-5595fe6b30ee}"]
+RightMouseUpAction=["Shell:::{20d04fe0-3aea-1069-a2d8-08002b30309d}"]
+;LeftMouseUpAction=["%userprofile%\AppData\Roaming\Microsoft\Windows\Libraries\Documents.library-ms"]
+
+[MenuLine1]
+Meter=Image
+SolidColor=#ButtonLight#
+X=((#WorkAreaWidth#/10)*2)
+Y=((#WorkAreaHeight#/10)-15)
+H=1
+W=((#WorkAreaWidth#/10)*7)
+
+[MeasureUserName]
+Measure=Plugin
+Plugin=SysInfo.dll
+SysInfoType=User_Name
+UpdateDivider=-1
+
+[UserName]
+Meter=String
+MeasureName=MeasureUserName
+FontFace=Denton
+FontSize=12
+StringStyle=Bold
+StringAlign=RightCenter
+X=((#WorkAreaWidth#/10)*2)
+Y=r
+
+[Menu1BG]
+Meter=Image
+ImageName=#@#Images\bar-lite.png
+x=10r
+y=-10r
+MouseOverAction = [!SetOption Menu1 FontColor #Blue#]
+MouseLeaveAction = [!SetOption Menu1 FontColor #Black#]
+LeftMouseUpAction = [!SetOption Menu2BG ImageName "#@#Images\bar.png"][!SetOption Menu1BG ImageName "#@#Images\bar-lite.png"][!SetOption PathTitle Text "Executable Operations / Computer Information / System Properties"][!HideMeterGroup DataWindow][!ShowMeterGroup EO-SP][!Redraw]
+RightMouseUpAction=["Shell:::{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}"]
+
+[Menu2BG]
+Meter=Image
+ImageName=#@#Images\bar.png
+x=260r
+y=r
+MouseOverAction = [!SetOption Menu2 FontColor #Blue#]
+MouseLeaveAction = [!SetOption Menu2 FontColor #Black#]
+LeftMouseUpAction = [!SetOption Menu1BG ImageName "#@#Images\bar.png"][!SetOption Menu2BG ImageName "#@#Images\bar-lite.png"][!SetOption PathTitle Text "Executable Operations / Computer Information / System Settings"][!HideMeterGroup DataWindow][!Redraw]
+RightMouseUpAction = ["shell:::{ED7BA470-8E54-465E-825C-99712043E01C}"]
+[Menu1]
+Meter=String
+FontFace=Denton
+FontSize=12
+X=((#WorkAreaWidth#/10)*2)+30
+y=2r
+Text=EXECUTABLE OPS
+
+[Menu2]
+Meter=String
+FontFace=Denton
+FontSize=12
+X=256r
+y=r
+Text=SYSTEM SETTINGS
+
+[ShutdownBG]
+Meter=Image
+ImageName=#@#Images\bar.png
+x=(#WorkAreaWidth# - 250)
+y=-2r
+MouseOverAction = [!SetOption lblShutdown FontColor #Red#]
+MouseLeaveAction = [!SetOption lblShutdown FontColor #Black#]
+LeftMouseDownAction=!Execute[%windir%\System32\shutdown.exe -s -t 10][!HideMeterGroup SystemBar][!ShowMeterGroup SystemAbort]
+RightMouseUpAction=[!Quit]
+
+[lblShutdown]
+Meter=String
+MeterStyle=ButtonStyle
+Text=SHUTDOWN
+X=(#WorkAreaWidth# - 220)
+Y=2r
+
+[RestartBG]
+Meter=Image
+ImageName=#@#Images\bar.png
+x=(#WorkAreaWidth# - 250)
+y=-25r
+MouseOverAction = [!SetOption lblRestart FontColor #Red#]
+MouseLeaveAction = [!SetOption lblRestart FontColor #Black#]
+LeftMouseDownAction=!Execute[%windir%\System32\shutdown.exe -r -t 10][!HideMeterGroup SystemBar][!ShowMeterGroup SystemAbort]
+RightMouseUpAction=[!RefreshApp]
+
+[lblRestart]
+Meter=String
+MeterStyle=ButtonStyle
+Text=RESTART
+X=(#WorkAreaWidth# - 220)
+Y=2r
+
+[LogoffBG]
+Meter=Image
+ImageName=#@#Images\bar.png
+x=(#WorkAreaWidth# - 250)
+y=-25r
+MouseOverAction = [!SetOption lblLogoff FontColor #Red#]
+MouseLeaveAction = [!SetOption lblLogoff FontColor #Black#]
+LeftMouseDownAction=!Execute[%windir%\System32\shutdown.exe -l][!HideMeterGroup SystemBar][!ShowMeterGroup SystemAbort]
+Hidden=1
+
+[lblLogoff]
+Meter=String
+MeterStyle=ButtonStyle
+Text=LOG-OFF
+X=(#WorkAreaWidth# - 220)
+Y=2r
+Hidden=1
+
+[SystemMenuBG]
+Meter=Image
+ImageName=#@#Images\bar-lite.png
+x=(#WorkAreaWidth# - 250)
+y=-25r
+Group=SystemBar
+
+[SystemMenuText]
+Meter=String
+MeterStyle=ButtonStyle
+X=(#WorkAreaWidth# - 220)
+Y=2r
+Text=SYSTEM OPTIONS
+Group=SystemBar
+
+[SystemAbortBG]
+Meter=Image
+ImageName=#@#Images\bar-lite.png
+x=(#WorkAreaWidth# - 250)
+y=-2r
+LeftMouseDownAction=!Execute[%windir%\System32\shutdown.exe -a][!HideMeterGroup SystemAbort][!ShowMeterGroup SystemBar]
+OnMouseOverAction=[!SetOption SystemAbortText FontColor #Yellow#]
+OnMouseLeaveAction=[!SetOption SystemAbortText FontColor #Red#]
+Hidden=1
+Group=SystemAbort
+
+[SystemAbortText]
+Meter=String
+MeterStyle=ButtonStyle
+X=(#WorkAreaWidth# - 220)
+Y=2r
+Text=SYSTEM ABORT
+FontColor=#Red#
+Hidden=1
+Group=SystemAbort
+
+;--------------------------------------------------------------------------------------------------
+
+;--------------------------------------------------------------------------------------------------
+;------------------------------------ Left Menu System --------------------------------------------
+
+[MenuTitleExt]
+Meter=Image
+X=0
+Y=((#WorkAreaHeight#/10)+20)
+W=(((#WorkAreaWidth#/10)*2.0) - 260)
+H=20
+SolidColor = #ButtonLight#
+
+[MenuTitleBG]
+Meter=Image
+ImageName = #@#Images\bar.png
+X=(((#WorkAreaWidth#/10)*2.0) - 260)
+Y=((#WorkAreaHeight#/10)+20)
+
+[MenuTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text = Executable Operations
+Group=OpsTitles
+
+[Section1BG]
+Meter=Image
+ImageName = #@#Images\bar.png
+X=-20r
+Y=48r
+
+[Section1Title]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Applications
+Group=OpsTitles
+
+[Section1Line]
+Meter=Image
+SolidColor=#ButtonDark#
+X=-10r
+Y=18r
+W=2
+H=85
+
+[Section1aBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-10r
+Y=10r
+MouseOverAction = [!SetOption Section1aTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section1aTitle FontColor #Black#]
+LeftMouseUpAction = [!SetOption Menu2BG ImageName "#@#Images\bar.png"][!SetOption Menu1BG ImageName "#@#Images\bar-lite.png"][!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"][!HideMeterGroup DataWindow][!ShowMeterGroup MSApps]
+Group=OpsBars
+
+[Section1aTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=MS Office
+Group=OpsTitles
+
+[Section1bBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section1bTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section1bTitle FontColor #Black#]
+LeftMouseUpAction = [!SetOption Menu2BG ImageName "#@#Images\bar.png"][!SetOption Menu1BG ImageName "#@#Images\bar-lite.png"][!SetOption PathTitle Text "Executable Operations / Applications / Windows Utilities"][!HideMeterGroup DataWindow][!ShowMeterGroup Windows]
+Group=OpsBars
+
+[Section1bTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Windows Utilities
+Group=OpsTitles
+
+[Section1cBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section1cTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section1cTitle FontColor #Black#]
+LeftMouseUpAction = [!SetOption Menu2BG ImageName "#@#Images\bar.png"][!SetOption Menu1BG ImageName "#@#Images\bar-lite.png"][!SetOption PathTitle Text "Executable Operations / Applications / My Applications"][!HideMeterGroup DataWindow][!ShowMeterGroup MyApps]
+Group=OpsBars
+
+[Section1cTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=My Applications
+Group=OpsTitles
+
+[Section2BG]
+Meter=Image
+ImageName = #@#Images\bar.png
+X=-20r
+Y=48r
+
+[Section2Title]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Computer Information
+Group=OpsTitles
+
+[Section2Line]
+Meter=Image
+SolidColor=#ButtonDark#
+X=-10r
+Y=18r
+W=2
+H=85
+
+[Section2aBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-10r
+Y=10r
+MouseOverAction = [!SetOption Section2aTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section2aTitle FontColor #Black#]
+LeftMouseUpAction = [!HideMeterGroup DataWindow][!ShowMeterGroup EO-SP][!SetOption PathTitle Text "Executable Operations / Applications / System Properties"][!Redraw]
+Group=OpsBars
+
+[Section2aTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=System Properties
+Group=OpsTitles
+
+[Section2bBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section2bTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section2bTitle FontColor #Black#]
+Group=OpsBars
+
+[Section2bTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Network Center
+Group=OpsTitles
+
+[Section2cBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section2cTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section2cTitle FontColor #Black#]
+Group=OpsBars
+
+[Section2cTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Drive Information
+Group=OpsTitles
+
+[Section3BG]
+Meter=Image
+ImageName = #@#Images\bar.png
+X=-20r
+Y=48r
+
+[Section3Title]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Internet News
+Group=OpsTitles
+
+[Section3Line]
+Meter=Image
+SolidColor=#ButtonDark#
+X=-10r
+Y=18r
+W=2
+H=85
+
+[Section3aBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-10r
+Y=10r
+MouseOverAction = [!SetOption Section3aTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section3aTitle FontColor #Black#]
+Group=OpsBars
+
+[Section3aTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=RSS Reader
+Group=OpsTitles
+
+[Section3bBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section3bTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section3bTitle FontColor #Black#]
+Group=OpsBars
+
+[Section3bTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=Weather
+Group=OpsTitles
+
+[Section3cBG]
+Meter=Image
+ImageName = #@#Images\bar-dark.png
+X=-20r
+Y=28r
+MouseOverAction = [!SetOption Section3cTitle FontColor #Blue#]
+MouseLeaveAction = [!SetOption Section3cTitle FontColor #Black#]
+Group=OpsBars
+
+[Section3cTitle]
+Meter=String
+FontFace=Denton
+StringStyle=Bold
+X=20r
+Y=2r
+Text=World Map
+Group=OpsTitles
+
+;--------------------------------------------------------------------------------------------------
+
+
+;------------------------------------ Path Information --------------------------------------------
+;--------------------------------------------------------------------------------------------------
+
+[PathBorder]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2.0)+2)
+Y = ((#WorkAreaHeight#/10)+50)
+H = 2
+W = ((#WorkAreaWidth# - (#WorkAreaWidth#/10)*2.0)-1)
+SolidColor = #LightBlue#
+
+[PathTitle]
+Meter=String
+FontFace=Denton
+FontSize=15
+FontColor = #Blue#
+StringAlign = Left
+X = (((#WorkAreaWidth#/10)*2.0)+22)
+Y = ((#WorkAreaHeight#/10)+15)
+Text = Executable Operations / Computer Information / System Properties
+;solidcolor=0,0,0,100
+
+;--------------------------------------------------------------------------------------------------
+
+
+;--------------------------------------------------------------------------------------------------
+;----------------------------------- System Properties --------------------------------------------
+
+[SPTitle1]
+Meter=String
+FontFace=Denton
+FontSize=12
+FontColor=#Blue#
+X=(((#WorkAreaWidth#/10)*2.0)+20)
+Y=((#WorkAreaHeight#/10)+65)
+Text = > B A S I C    C O M P U T E R    I N F O R M A T I O N
+Group=EO-SP | DataWindow
+
+[SPTopBarLeft]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2.0)+20)
+Y = ((#WorkAreaHeight#/10)+85)
+H = 1
+W = 700
+SolidColor = #LightBlue#
+Group=EO-SP | DataWindow
+
+[SPLeftVerticalBar]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2.0)+350)
+Y = 1r
+H = 190
+W = 1
+SolidColor = #LightBlue#
+Group=EO-SP | DataWindow
+
+[Line0Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -10r
+Y = 10r
+AntiAlias=1
+Text = COMPUTER NAME
+Group=EO-SP | DataWindow
+
+[PCName]
+Measure=Plugin
+Plugin=SysInfo.dll
+SysInfoType=COMPUTER_NAME
+UpdateDivider=-1
+
+[Line0Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=PCName
+Group=EO-SP | DataWindow
+
+[Line1Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = OPERATING SYSTEM
+Group=EO-SP | DataWindow
+
+[OSVer]
+Measure=Registry
+RegHKey=HKEY_LOCAL_MACHINE
+RegKey=software\Microsoft\Windows NT\CurrentVersion
+RegValue=ProductName
+UpdateDivider=-1
+
+[Line1Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=OSVer
+Group=EO-SP | DataWindow
+
+[Line2Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = SYSTEM TYPE
+Group=EO-SP | DataWindow
+
+[OSType]
+Measure=Plugin
+Plugin=SysInfo.dll
+SysInfoType=OS_BITS
+UpdateDivider=-1
+
+[Line2Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=OSType
+Group=EO-SP | DataWindow
+
+[Line3Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = OS VERSION
+Group=EO-SP | DataWindow
+
+[OSVersion]
+Measure=Registry
+RegHKey=HKEY_LOCAL_MACHINE
+RegKey=software\Microsoft\Windows NT\CurrentVersion
+RegValue=CSDVersion
+UpdateDivider=-1
+
+[Line3Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=OSVersion
+Group=EO-SP | DataWindow
+
+[Line4Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = UPTIME
+Group=EO-SP | DataWindow
+
+[MeasureUptime]
+Measure=Uptime
+Format="%4!i! days, %3!i! hours, %2!i! minutes %1!i! seconds"
+
+[Line4Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureUptime
+Group=EO-SP | DataWindow
+
+[Line5Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = RESOLUTION
+Group=EO-SP | DataWindow
+
+[Line5Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+Text = #WorkAreaWidth# x #WorkAreaHeight#
+Group=EO-SP | DataWindow
+
+[Line5ALabel]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = CONNECTED MONITORS
+Group=EO-SP | DataWindow
+
+[MeasureMonitors]
+Measure=Registry
+RegHKey=HKEY_LOCAL_MACHINE
+RegKey=SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winsat
+RegValue=NumMonitors
+
+[Line5AData]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureMonitors
+Group=EO-SP | DataWindow
+
+[Line6Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = ACTIVE PROCESSES
+Group=EO-SP | DataWindow
+
+[MeasureProcesses]
+Measure=Plugin
+Plugin=PerfMon.dll
+PerfMonObject="System"
+PerfMonCounter="Processes"
+PerfMonInstance=""
+PerfMonDifference=0
+
+[Line6Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureProcesses
+Group=EO-SP | DataWindow
+
+[Line7Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = TOP PROCESS
+Group=EO-SP | DataWindow
+
+[MeasureTopProcess]
+Measure=Plugin
+Plugin=AdvancedCPU.dll
+PerfMonObject="System"
+TopProcess=2
+CPUExclude=Idle
+
+[MeasureTopProcessUsage]
+Measure=Plugin
+Plugin=AdvancedCPU.dll
+PerfMonObject="System"
+TopProcess=1
+CPUExclude=Idle
+
+[Line7Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureTopProcess
+MeasureName2=MeasureTopProcessUsage
+Text = %1 (%2%)
+ClipString=1
+Scale=200000
+Group=EO-SP | DataWindow
+
+[Line8Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = CENTRAL PROCESSOR
+Group=EO-SP | DataWindow
+
+[MeasureCPUName]
+Measure=Registry
+RegHKey=HKEY_LOCAL_MACHINE
+RegKey=HARDWARE\DESCRIPTION\System\CentralProcessor\0
+RegValue=ProcessorNameString
+UpdateDivider=-1
+
+[Line8Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureCPUName
+Group=EO-SP | DataWindow
+
+[Line9Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = CPU CLOCK
+Group=EO-SP | DataWindow
+
+[MeasureCPUMHz]
+Measure=Plugin
+Plugin=PowerPlugin.dll
+PowerState=MHZ
+UpdateDivider=-1
+
+[Line9Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+MeasureName=MeasureCPUMHz
+Text=%1 MHz
+Group=EO-SP | DataWindow
+
+[Line10Label]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+StringAlign=Right
+X = -20r
+Y = 15r
+AntiAlias=1
+Text = PRIMARY GPU
+Group=EO-SP | DataWindow
+
+[MeasureGPU]
+Measure=Registry
+RegHKey=HKEY_LOCAL_MACHINE
+RegKey=software\Microsoft\Windows NT\CurrentVersion\Winsat
+RegValue=PrimaryAdapterString
+UpdateDivider=-1
+
+[Line10Data]
+Meter=String
+FontFace=Denton
+FontSize=10
+FontColor=#Yellow#
+X = 20r
+Y = r
+AntiAlias=1
+ClipString=1
+MeasureName=MeasureGPU
+Group=EO-SP | DataWindow
+
+;--------------------------------------------------------------------------------------------------
+
+
+;--------------------------------------------------------------------------------------------------
+;-------------------------------------- MS Office Apps --------------------------------------------
+
+[MSOutlookIcon]
+Meter=Image
+ImageName=#@#Images\MSOutlook.png
+X=(((#WorkAreaWidth#/10)*2.0)+20)
+Y=((#WorkAreaHeight#/10)+65)
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["Outlook.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Outlook"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSLyncIcon]
+Meter=Image
+ImageName=#@#Images\MSLync.png
+X=210r
+Y=r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["lync.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Lync"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSOneNoteIcon]
+Meter=Image
+ImageName=#@#Images\MSOneNote.png
+X=210r
+Y=r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["OneNote.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft One Note"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSAccessIcon]
+Meter=Image
+ImageName=#@#Images\MSAccess.png
+X=-420r
+Y=160r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["msaccess.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Access"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSExcelIcon]
+Meter=Image
+ImageName=#@#Images\MSExcel.png
+X=420r
+Y=r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["excel.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Excel"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSPublisherIcon]
+Meter=Image
+ImageName=#@#Images\MSPub.png
+X=-420r
+Y=160r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["mspub.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Publisher"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+[MSWordIcon]
+Meter=Image
+ImageName=#@#Images\MSWord.png
+X=420r
+Y=r
+H=75
+W=75
+ImageAlpha=200
+AntiAlias=1
+Hidden=1
+Group=MSApps | DataWindow
+LeftMouseUpAction = ["winword.exe"]
+MouseOverAction=[!SetOption PathTitle Text "Microsoft Word"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / Microsoft Office"]
+
+
+;--------------------------------------------------------------------------------------------------
+;------------------------------------ Windows Utilities ------------------------------------------------
+
+[WindowsStyle]
+FontFace=Denton
+FontColor=#LightBlue#
+FontSize=10
+
+[BitlockerBG]
+Meter=Image
+SolidColor=#Black#,1
+X=(((#WorkAreaWidth#/10)*2)+20)
+Y=((#WorkAreaHeight#/10)+65)
+H=20
+W=275
+MouseOverAction=[!SetOption BitLockerText FontColor "#White#"][!SetOption BitlockerBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption BitLockerText FontColor "#LightBlue#"][!SetOption BitlockerBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{D9EF8727-CAC2-4e60-809E-86F80A666C91}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[BitLockerText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=BitLocker Drive Encryption
+Hidden=1
+Group=Windows | DataWindow
+
+[CommonPlacesBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption CommonPlacesText FontColor "#White#"][!SetOption CommonPlacesBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption CommonPlacesText FontColor "#LightBlue#"][!SetOption CommonPlacesBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{d34a6ca6-62c2-4c34-8a7c-14709c1ad938}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[CommonPlacesText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Common Places FS Folder
+Hidden=1
+Group=Windows | DataWindow
+
+[DefaultProgramsBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption DefaultProgramsText FontColor "#White#"][!SetOption DefaultProgramsBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption DefaultProgramsText FontColor "#LightBlue#"][!SetOption DefaultProgramsBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{17cd9488-1228-4b2f-88ce-4298e93e0966}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[DefaultProgramsText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Default Programs
+Hidden=1
+Group=Windows | DataWindow
+
+[DeviceManagerBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption DeviceManagerText FontColor "#White#"][!SetOption DeviceManagerBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption DeviceManagerText FontColor "#LightBlue#"][!SetOption DeviceManagerBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{74246bfc-4c96-11d0-abef-0020af6b0b7a}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[DeviceManagerText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Device Manager
+Hidden=1
+Group=Windows | DataWindow
+
+[DevicesAndPrintersBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption DevicesAndPrintersText FontColor "#White#"][!SetOption DevicesAndPrintersBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption DevicesAndPrintersText FontColor "#LightBlue#"][!SetOption DevicesAndPrintersBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{A8A91A66-3A7D-4424-8D24-04E180695C7A}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[DevicesAndPrintersText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Devices and Printers
+Hidden=1
+Group=Windows | DataWindow
+
+[DefragBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption DefragText FontColor "#White#"][!SetOption DefragBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption DefragText FontColor "#LightBlue#"][!SetOption DefragBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["%windir%\system32\dfrgui.exe"]
+Hidden=1
+Group=Windows | DataWindow
+
+[DefragText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Defrag Disk
+Hidden=1
+Group=Windows | DataWindow
+
+[DisplayBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption DisplayText FontColor "#White#"][!SetOption DisplayBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption DisplayText FontColor "#LightBlue#"][!SetOption DisplayBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{C555438B-3C23-4769-A71F-B6D3D9B6053A}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[DisplayText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Display Settings
+Hidden=1
+Group=Windows | DataWindow
+
+[EnergyBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption EnergyText FontColor "#White#"][!SetOption EnergyBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption EnergyText FontColor "#LightBlue#"][!SetOption EnergyBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["powercfg" "-energy"]
+Hidden=1
+Group=Windows | DataWindow
+
+[EnergyText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Energy Report (Create)
+Hidden=1
+Group=Windows | DataWindow
+
+[EnergyReportBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption EnergyReportText FontColor "#White#"][!SetOption EnergyReportBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption EnergyReportText FontColor "#LightBlue#"][!SetOption EnergyReportBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["%userprofile%\energy-report.html"]
+Hidden=1
+Group=Windows | DataWindow
+
+[EnergyReportText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Energy Report (Report)
+Hidden=1
+Group=Windows | DataWindow
+
+[FirewallBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption FirewallText FontColor "#White#"][!SetOption FirewallBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption FirewallText FontColor "#LightBlue#"][!SetOption FirewallBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{4026492F-2F69-46B8-B9BF-5654FC07E423}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[FirewallText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Firewall
+Hidden=1
+Group=Windows | DataWindow
+
+[FolderOptionsBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption FolderOptionsText FontColor "#White#"][!SetOption FolderOptionsBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption FolderOptionsText FontColor "#LightBlue#"][!SetOption FolderOptionsBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{6DFD7C5C-2451-11d3-A299-00C04F8EF6AF}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[FolderOptionsText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Folder Options
+Hidden=1
+Group=Windows | DataWindow
+
+[IndexingBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption IndexingText FontColor "#White#"][!SetOption IndexingBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption IndexingText FontColor "#LightBlue#"][!SetOption IndexingBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{87D66A43-7B11-4A28-9811-C86EE395ACF7}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[IndexingText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Indexing Options
+Hidden=1
+Group=Windows | DataWindow
+
+[InternetBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption InternetText FontColor "#White#"][!SetOption InternetBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption InternetText FontColor "#LightBlue#"][!SetOption InternetBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{A3DD4F92-658A-410F-84FD-6FBBBEF2FFFE}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[InternetText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Internet Options
+Hidden=1
+Group=Windows | DataWindow
+
+[NetFlyoutBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption NetFlyoutText FontColor "#White#"][!SetOption NetFlyoutBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption NetFlyoutText FontColor "#LightBlue#"][!SetOption NetFlyoutBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{38A98528-6CBF-4CA9-8DC0-B1E1D10F7B1B}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[NetFlyoutText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Network Flyout
+Hidden=1
+Group=Windows | DataWindow
+
+[NetworkAndSharingBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption NetworkAndSharingText FontColor "#White#"][!SetOption NetworkAndSharingBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption NetworkAndSharingText FontColor "#LightBlue#"][!SetOption NetworkAndSharingBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{8E908FC9-BECC-40f6-915B-F4CA0E70D03D}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[NetworkAndSharingText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Network And Sharing Center
+Hidden=1
+Group=Windows | DataWindow
+
+[PersonalizationBG]
+Meter=Image
+SolidColor=#Black#,1
+X=(((#WorkAreaWidth#/10)*2)+400)
+Y=((#WorkAreaHeight#/10)+65)
+H=20
+W=275
+MouseOverAction=[!SetOption PersonalizationText FontColor "#White#"][!SetOption PersonalizationBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption PersonalizationText FontColor "#LightBlue#"][!SetOption PersonalizationBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{ED834ED6-4B5A-4bfe-8F11-A626DCB6A921}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[PersonalizationText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Personalization
+Hidden=1
+Group=Windows | DataWindow
+
+[PinnedBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption PinnedText FontColor "#White#"][!SetOption PinnedBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption PinnedText FontColor "#LightBlue#"][!SetOption PinnedBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{1f3427c8-5c10-4210-aa03-2ee45287d668}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[PinnedText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Pinned Items
+Hidden=1
+Group=Windows | DataWindow
+
+[PowerBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption PowerText FontColor "#White#"][!SetOption PowerBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption PowerText FontColor "#LightBlue#"][!SetOption PowerBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{025A5937-A6BE-4686-A844-36FE4BEC8B6D}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[PowerText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Power Options
+Hidden=1
+Group=Windows | DataWindow
+
+[ProgramsBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption ProgramsText FontColor "#White#"][!SetOption ProgramsBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption ProgramsText FontColor "#LightBlue#"][!SetOption ProgramsBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{7b81be6a-ce2b-4676-a29e-eb907a5126c5}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[ProgramsText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Programs and Features
+Hidden=1
+Group=Windows | DataWindow
+
+[PSRBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption PSRText FontColor "#White#"][!SetOption PSRBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption PSRText FontColor "#LightBlue#"][!SetOption PSRBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["psr"]
+Hidden=1
+Group=Windows | DataWindow
+
+[PSRText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Problem Steps Recorder
+Hidden=1
+Group=Windows | DataWindow
+
+[ReliabilityMonitorBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption ReliabilityMonitorText FontColor "#White#"][!SetOption ReliabilityMonitorBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption ReliabilityMonitorText FontColor "#LightBlue#"][!SetOption ReliabilityMonitorBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["perfmon" "/rel"]
+Hidden=1
+Group=Windows | DataWindow
+
+[ReliabilityMonitorText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Reliability Monitor
+Hidden=1
+Group=Windows | DataWindow
+
+[SoundBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption SoundText FontColor "#White#"][!SetOption SoundBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption SoundText FontColor "#LightBlue#"][!SetOption SoundBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{F2DDFC82-8F12-4CDD-B7DC-D4FE1425AA4D}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[SoundText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Sound Settings
+Hidden=1
+Group=Windows | DataWindow
+
+[SyncBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption SyncText FontColor "#White#"][!SetOption SyncBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption SyncText FontColor "#LightBlue#"][!SetOption SyncBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{9C73F5E5-7AE7-4E32-A8E8-8D23B85255BF}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[SyncText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Sync Center
+Hidden=1
+Group=Windows | DataWindow
+
+[SystemInfoBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption SystemInfoText FontColor "#White#"][!SetOption SystemInfoBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption SystemInfoText FontColor "#LightBlue#"][!SetOption SystemInfoBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[SystemInfoText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=System Info
+Hidden=1
+Group=Windows | DataWindow
+
+[UserAccountsBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption UserAccountsText FontColor "#White#"][!SetOption UserAccountsBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption UserAccountsText FontColor "#LightBlue#"][!SetOption UserAccountsBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{7A9D77BD-5403-11d2-8785-2E0420524153}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[UserAccountsText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=User Accounts
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowsBackupBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption WindowsBackupText FontColor "#White#"][!SetOption WindowsBackupBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption WindowsBackupText FontColor "#LightBlue#"][!SetOption WindowsBackupBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{B98A2BEA-7D42-4558-8BD1-832F41BAC6FD}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowsBackupText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Windows Backup & Restore
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowsUpdateBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption WindowsUpdateText FontColor "#White#"][!SetOption WindowsUpdateBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption WindowsUpdateText FontColor "#LightBlue#"][!SetOption WindowsUpdateBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{36eef7db-88ad-4e81-ad49-0e313f0c35f8}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowsUpdateText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Windows Update
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowSwitcherBG]
+Meter=Image
+SolidColor=#Black#,1
+X=-5r
+Y=23r
+H=20
+W=275
+MouseOverAction=[!SetOption WindowSwitcherText FontColor "#White#"][!SetOption WindowSwitcherBG SolidColor "#Black#,50"]
+MouseLeaveAction=[!SetOption WindowSwitcherText FontColor "#LightBlue#"][!SetOption WindowSwitcherBG SolidColor "#Black#,1"]
+LeftMouseUpAction=!Execute["Shell:::{3080F90E-D7AD-11D9-BD98-0000947B0257}"]
+Hidden=1
+Group=Windows | DataWindow
+
+[WindowSwitcherText]
+Meter=String
+MeterStyle=WindowsStyle
+X=5r
+Y=2r
+Text=Window Switcher
+Hidden=1
+Group=Windows | DataWindow
+
+;--------------------------------------------------------------------------------------------------
+;-------------------------------------- My Applications ---------------------------------------
+
+[App1]
+Meter=Image
+ImageName="#@#Images\#App1Icon#"
+X=(((#WorkAreaWidth#/10)*2)+20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App1Name#"][!ShowMeter Elipsis1]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"][!HideMeter Elipsis1]
+LeftMouseDoubleClickAction = ["#App1Path#"]
+Group=MyApps | DataWindow
+
+[App2]
+Meter=Image
+ImageName="#@#Images\#App2Icon#"
+X=(((#WorkAreaWidth#/10)*2)+#IconSpacingH#+20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App2Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App2Path#"]
+Group=MyApps | DataWindow
+
+[App3]
+Meter=Image
+ImageName="#@#Images\#App3Icon#"
+X=(((#WorkAreaWidth#/10)*2)+(#IconSpacingH# * 2)+20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App3Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App3Path#"]
+Group=MyApps | DataWindow
+
+[App4]
+Meter=Image
+ImageName="#@#Images\#App4Icon#"
+X=(((#WorkAreaWidth#/10)*2)+(#IconSpacingH# * 3)+20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App4Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App4Path#"]
+Group=MyApps | DataWindow
+
+[App5]
+Meter=Image
+ImageName="#@#Images\#App5Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+(#IconSpacingH# * 4)+20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App5Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App5Path#"]
+Group=MyApps | DataWindow
+
+[App6]
+Meter=Image
+ImageName="#@#Images\#App6Icon#"
+X=(((#WorkAreaWidth#/10) * 2) + (#IconSpacingH# * 5) + 20)
+Y=((#WorkAreaHeight#/10)+65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App6Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App6Path#"]
+Group=MyApps | DataWindow
+
+[App7]
+Meter=Image
+ImageName="#@#Images\#App7Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#) + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App7Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App7Path#"]
+Group=MyApps | DataWindow
+
+[App8]
+Meter=Image
+ImageName="#@#Images\#App8Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH#) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#) + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App8Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App8Path#"]
+Group=MyApps | DataWindow
+
+[App9]
+Meter=Image
+ImageName="#@#Images\#App9Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH# * 2) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#) + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App9Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App9Path#"]
+Group=MyApps | DataWindow
+
+[App10]
+Meter=Image
+ImageName="#@#Images\#App10Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH# * 3) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#) + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App10Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App10Path#"]
+Group=MyApps | DataWindow
+
+[App11]
+Meter=Image
+ImageName="#@#Images\#App11Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH# * 4) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#) + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App11Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App11Path#"]
+Group=MyApps | DataWindow
+
+[App12]
+Meter=Image
+ImageName="#@#Images\#App12Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App12Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App12Path#"]
+Group=MyApps | DataWindow
+
+[App13]
+Meter=Image
+ImageName="#@#Images\#App13Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+ (#IconSpacingH#) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App13Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App13Path#"]
+Group=MyApps | DataWindow
+
+[App14]
+Meter=Image
+ImageName="#@#Images\#App14Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+ (#IconSpacingH#)*2 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App14Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App14Path#"]
+Group=MyApps | DataWindow
+
+[App15]
+Meter=Image
+ImageName="#@#Images\#App15Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+ (#IconSpacingH#)*3 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App15Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App15Path#"]
+Group=MyApps | DataWindow
+
+[App16]
+Meter=Image
+ImageName="#@#Images\#App16Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+ (#IconSpacingH#)*4 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App16Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App16Path#"]
+Group=MyApps | DataWindow
+
+[App17]
+Meter=Image
+ImageName="#@#Images\#App17Icon#"
+X=(((#WorkAreaWidth#/10)*2.0)+ (#IconSpacingH#)*5 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*2 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App17Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App17Path#"]
+Group=MyApps | DataWindow
+
+[App18]
+Meter=Image
+ImageName="#@#Images\#App18Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*3 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App18Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App18Path#"]
+Group=MyApps | DataWindow
+
+[App19]
+Meter=Image
+ImageName="#@#Images\#App19Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH#) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*3 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App19Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App19Path#"]
+Group=MyApps | DataWindow
+
+[App20]
+Meter=Image
+ImageName="#@#Images\#App20Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH#)*2 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*3 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App20Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App20Path#"]
+Group=MyApps | DataWindow
+
+[App21]
+Meter=Image
+ImageName="#@#Images\#App21Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH#)*3 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*3 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App21Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App21Path#"]
+Group=MyApps | DataWindow
+
+[App22]
+Meter=Image
+ImageName="#@#Images\#App22Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#/2) + (#IconSpacingH#)*4+ 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*3 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App22Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App22Path#"]
+Group=MyApps | DataWindow
+
+[App23]
+Meter=Image
+ImageName="#@#Images\#App23Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App23Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App23Path#"]
+Group=MyApps | DataWindow
+
+[App24]
+Meter=Image
+ImageName="#@#Images\#App24Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#) + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App24Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App24Path#"]
+Group=MyApps | DataWindow
+
+[App25]
+Meter=Image
+ImageName="#@#Images\#App25Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#)*2 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App25Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App25Path#"]
+Group=MyApps | DataWindow
+
+[App26]
+Meter=Image
+ImageName="#@#Images\#App26Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#)*3 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App26Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App26Path#"]
+Group=MyApps | DataWindow
+
+[App27]
+Meter=Image
+ImageName="#@#Images\#App27Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#)*4 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App27Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App27Path#"]
+Group=MyApps | DataWindow
+
+[App28]
+Meter=Image
+ImageName="#@#Images\#App28Icon#"
+X=(((#WorkAreaWidth#/10)*2.0) + (#IconSpacingH#)*5 + 20)
+Y=((#WorkAreaHeight#/10)+ (#IconSpacingV#)*4 + 65)
+MeterStyle=IconStyle
+PreserveAspectRatio=1
+MouseOverAction=[!SetOption PathTitle Text "#App28Name#"]
+MouseLeaveAction=[!SetOption PathTitle Text "Executable Operations / Applications / My Apps"]
+LeftMouseDoubleClickAction = ["#App28Path#"]
+Group=MyApps | DataWindow
+
+;--------------------------------------------------------------------------------------------------
+
+
+;----------------------------------------------------
+; Styles
+;----------------------------------------------------
+
+[HighlightStyle]
+SolidColor=0,0,0,1
+X=r
+Y=([Index1Info:H])r
+W=250
+H=([Index1Info:H])
+DynamicVariables=1
+MouseOverAction=[!SetOption #CURRENTSECTION# SolidColor "50,50,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# SolidColor ""][!UpdateMeter #CURRENTSECTION#][!Redraw]
+
+[InfoStyle]
+X=r
+Y=r
+H=12
+W=245
+Text="%1 "
+AntiAlias=1
+FontColor=255,255,0,200
+AntiAlias=1
+FontSize=8
+Clipstring=2
+
+;----------------------------------------------------
+; Measures
+;----------------------------------------------------
+
+[dbPath]
+Measure=Plugin
+Plugin=FileView
+Path="%userprofile%\Appdata\Roaming\Microsoft\Windows\Recent"
+ShowDotDot=0
+ShowFolder=0
+ShowHidden=0
+HideExtensions=1
+SortAscending=1
+Extensions="lnk"
+WildcardSearch=*accdb.lnk
+Count=8
+DynamicVariables=1
+
+;----------------------------------------------------
+; Index 1
+
+[dbIndex1Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=1
+Group=Children
+
+;----------------------------------------------------
+; Index 2
+
+[dbIndex2Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=2
+Group=Children
+
+;----------------------------------------------------
+; Index 3
+
+[dbIndex3Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=3
+Group=Children
+
+;----------------------------------------------------
+; Index 4
+
+[dbIndex4Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=4
+Group=Children
+
+;----------------------------------------------------
+; Index 5
+
+[dbIndex5Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=5
+Group=Children
+
+;----------------------------------------------------
+; Index 6
+
+[dbIndex6Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=6
+Group=Children
+
+;----------------------------------------------------
+; Index 7
+
+[dbIndex7Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=7
+Group=Children
+
+;----------------------------------------------------
+; Index 8
+
+[dbIndex8Name]
+Measure=Plugin
+Plugin=FileView
+Path=[dbPath]
+Type=FileName
+Index=8
+Group=Children
+
+;----------------------------------------------------
+; Meters
+;----------------------------------------------------
+
+[MeterDBFileList]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2) + 100)
+Y = (((#WorkAreaHeight#/10)*2) + 130)
+H = 1
+W = 1
+SolidColor = 0, 0, 0, 200
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index1]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex1Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index1Info]
+Meter=String
+MeasureName=dbIndex1Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index2]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex2Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index2Info]
+Meter=String
+MeasureName=dbIndex2Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index3]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex3Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index3Info]
+Meter=String
+MeasureName=dbIndex3Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index4]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex4Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index4Info]
+Meter=String
+MeasureName=dbIndex4Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index5]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex5Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index5Info]
+Meter=String
+MeasureName=dbIndex5Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index6]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex6Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index6Info]
+Meter=String
+MeasureName=dbIndex6Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index7]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex7Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index7Info]
+Meter=String
+MeasureName=dbIndex7Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index8]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure dbIndex8Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[Index8Info]
+Meter=String
+MeasureName=dbIndex8Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+;************************************* XL File List *********************************
+
+;----------------------------------------------------
+; Measures
+;----------------------------------------------------
+
+[xlPath]
+Measure=Plugin
+Plugin=FileView
+Path="%userprofile%\Appdata\Roaming\Microsoft\Windows\Recent"
+ShowDotDot=0
+ShowFolder=0
+ShowHidden=0
+HideExtensions=1
+SortAscending=1
+Extensions="lnk"
+WildcardSearch=*xls*.lnk
+Count=8
+DynamicVariables=1
+
+;----------------------------------------------------
+; Index 1
+
+[xlIndex1Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=1
+Group=Children
+
+;----------------------------------------------------
+; Index 2
+
+[xlIndex2Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=2
+Group=Children
+
+;----------------------------------------------------
+; Index 3
+
+[xlIndex3Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=3
+Group=Children
+
+;----------------------------------------------------
+; Index 4
+
+[xlIndex4Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=4
+Group=Children
+
+;----------------------------------------------------
+; Index 5
+
+[xlIndex5Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=5
+Group=Children
+
+;----------------------------------------------------
+; Index 6
+
+[xlIndex6Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=6
+Group=Children
+
+;----------------------------------------------------
+; Index 7
+
+[xlIndex7Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=7
+Group=Children
+
+;----------------------------------------------------
+; Index 8
+
+[xlIndex8Name]
+Measure=Plugin
+Plugin=FileView
+Path=[xlPath]
+Type=FileName
+Index=8
+Group=Children
+
+;----------------------------------------------------
+; Meters
+;----------------------------------------------------
+
+[MeterXLFileList]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2) + 530)
+Y = (((#WorkAreaHeight#/10)*2) + 130)
+H = 1
+W = 1
+SolidColor = 0, 0, 0, 200
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex1]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex1Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex1Info]
+Meter=String
+MeasureName=xlIndex1Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex2]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex2Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex2Info]
+Meter=String
+MeasureName=xlIndex2Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex3]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex3Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex3Info]
+Meter=String
+MeasureName=xlIndex3Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex4]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex4Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex4Info]
+Meter=String
+MeasureName=xlIndex4Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex5]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex5Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex5Info]
+Meter=String
+MeasureName=xlIndex5Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex6]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex6Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex6Info]
+Meter=String
+MeasureName=xlIndex6Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex7]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex7Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex7Info]
+Meter=String
+MeasureName=xlIndex7Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex8]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure xlIndex8Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[xlIndex8Info]
+Meter=String
+MeasureName=xlIndex8Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+;****************************************** MS Publisher Files ************************************
+
+;----------------------------------------------------
+; Measures
+;----------------------------------------------------
+
+[pubPath]
+Measure=Plugin
+Plugin=FileView
+Path="%userprofile%\Appdata\Roaming\Microsoft\Windows\Recent"
+ShowDotDot=0
+ShowFolder=0
+ShowHidden=0
+HideExtensions=1
+SortAscending=1
+Extensions="lnk"
+WildcardSearch=*pub.lnk
+Count=8
+DynamicVariables=1
+
+;----------------------------------------------------
+; Index 1
+
+[pubIndex1Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=1
+Group=Children
+
+;----------------------------------------------------
+; Index 2
+
+[pubIndex2Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=2
+Group=Children
+
+;----------------------------------------------------
+; Index 3
+
+[pubIndex3Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=3
+Group=Children
+
+;----------------------------------------------------
+; Index 4
+
+[pubIndex4Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=4
+Group=Children
+
+;----------------------------------------------------
+; Index 5
+
+[pubIndex5Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=5
+Group=Children
+
+;----------------------------------------------------
+; Index 6
+
+[pubIndex6Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=6
+Group=Children
+
+;----------------------------------------------------
+; Index 7
+
+[pubIndex7Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=7
+Group=Children
+
+;----------------------------------------------------
+; Index 8
+
+[pubIndex8Name]
+Measure=Plugin
+Plugin=FileView
+Path=[pubPath]
+Type=FileName
+Index=8
+Group=Children
+
+;----------------------------------------------------
+; Meters
+;----------------------------------------------------
+
+[MeterPubFileList]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2) + 100)
+Y = (((#WorkAreaHeight#/10)*2) + 285)
+H = 1
+W = 1
+SolidColor = 0, 0, 0, 200
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex1]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex1Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex1Info]
+Meter=String
+MeasureName=pubIndex1Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex2]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex2Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex2Info]
+Meter=String
+MeasureName=pubIndex2Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex3]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex3Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex3Info]
+Meter=String
+MeasureName=pubIndex3Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex4]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex4Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex4Info]
+Meter=String
+MeasureName=pubIndex4Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex5]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex5Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex5Info]
+Meter=String
+MeasureName=pubIndex5Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex6]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex6Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex6Info]
+Meter=String
+MeasureName=pubIndex6Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex7]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex7Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex7Info]
+Meter=String
+MeasureName=pubIndex7Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex8]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure pubIndex8Name "FollowPath"][!UpdateMeasure pubPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[pubIndex8Info]
+Meter=String
+MeasureName=pubIndex8Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+;************************************* Word File List *********************************
+
+;----------------------------------------------------
+; Measures
+;----------------------------------------------------
+
+[DocPath]
+Measure=Plugin
+Plugin=FileView
+Path="%userprofile%\Appdata\Roaming\Microsoft\Windows\Recent"
+ShowDotDot=0
+ShowFolder=0
+ShowHidden=0
+HideExtensions=1
+SortAscending=1
+Extensions="lnk"
+WildcardSearch=*doc*.lnk
+Count=8
+DynamicVariables=1
+
+;----------------------------------------------------
+; Index 1
+
+[docIndex1Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=1
+Group=Children
+
+;----------------------------------------------------
+; Index 2
+
+[docIndex2Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=2
+Group=Children
+
+;----------------------------------------------------
+; Index 3
+
+[docIndex3Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=3
+Group=Children
+
+;----------------------------------------------------
+; Index 4
+
+[docIndex4Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=4
+Group=Children
+
+;----------------------------------------------------
+; Index 5
+
+[docIndex5Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=5
+Group=Children
+
+;----------------------------------------------------
+; Index 6
+
+[docIndex6Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=6
+Group=Children
+
+;----------------------------------------------------
+; Index 7
+
+[docIndex7Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=7
+Group=Children
+
+;----------------------------------------------------
+; Index 8
+
+[docIndex8Name]
+Measure=Plugin
+Plugin=FileView
+Path=[docPath]
+Type=FileName
+Index=8
+Group=Children
+
+;----------------------------------------------------
+; Meters
+;----------------------------------------------------
+
+[MeterDocFileList]
+Meter=Image
+X = (((#WorkAreaWidth#/10)*2) + 530)
+Y = (((#WorkAreaHeight#/10)*2) + 285)
+H = 1
+W = 1
+SolidColor = 0, 0, 0, 200
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex1]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex1Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex1Info]
+Meter=String
+MeasureName=docIndex1Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex2]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex2Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex2Info]
+Meter=String
+MeasureName=docIndex2Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex3]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex3Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex3Info]
+Meter=String
+MeasureName=docIndex3Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex4]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex4Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex4Info]
+Meter=String
+MeasureName=docIndex4Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex5]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex5Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex5Info]
+Meter=String
+MeasureName=docIndex5Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex6]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex6Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex6Info]
+Meter=String
+MeasureName=docIndex6Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex7]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex7Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex7Info]
+Meter=String
+MeasureName=docIndex7Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex8]
+Meter=Image
+MeterStyle=HighlightStyle
+LeftMouseDoubleClickAction=[!CommandMeasure docIndex8Name "FollowPath"][!UpdateMeasure dbPath][!UpdateMeasureGroup Children][!UpdateMeter *][!Redraw]
+Group=MSApps | DataWindow
+Hidden=1
+
+[docIndex8Info]
+Meter=String
+MeasureName=docIndex8Name
+MeterStyle = InfoStyle
+Group=MSApps | DataWindow
+Hidden=1

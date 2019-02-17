@@ -1,0 +1,43 @@
+[Rainmeter]
+Update=1000
+AccurateText=1
+DynamicWindowSize=1
+BackgroundMode=2
+SolidColor=0,0,0,255
+
+[MeasureMyPictures]
+Measure=Plugin
+Plugin=QuotePlugin
+PathName=%userprofile%\Pictures\Wallpaper
+Subfolders=0
+FileFilter=*.jpg
+UpdateDivider=180
+
+[MeterShowPicture]
+Meter=Image
+MeasureName=MeasureMyPictures
+X=1
+Y=0
+W=#WorkAreaWidth#
+H=#WorkAreaHeight#
+PreserveAspectRatio=2
+ImageAlpha=90
+
+[MeterWindowImage]
+Meter=Image
+MeasureName=MeasureMyPictures
+X = (#ScreenAreaWidth#-#WorkAreaWidth#)
+Y = ((#WorkAreaHeight#/10) + 480)
+H = (#WorkAreaHeight# - ((#WorkAreaHeight#/10)*2) - 480)
+W = ((#WorkAreaWidth#/10) * 2)
+PreserveAspectRatio=1
+ImageAlpha=200
+
+;[DataWindowBackground]
+;Meter=Image
+;SolidColor = 0, 0, 0, 100
+;X = (((#ScreenAreaWidth#/10)*2)+2)
+;Y = ((#ScreenAreaHeight#/10)+2)
+;H = (((#ScreenAreaHeight#/10)*8)-2)
+;W = ((#ScreenAreaWidth#/10)*6)
+
